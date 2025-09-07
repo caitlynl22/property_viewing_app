@@ -7,6 +7,6 @@ FactoryBot.define do
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip_code }
     year_built { Faker::Number.between(from: 1900, to: 2024) }
-    website { Faker::Internet.url }
+    website_url { Faker::Internet.url }
   end
 end
