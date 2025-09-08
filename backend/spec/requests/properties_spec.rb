@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Properties API", type: :request do
   describe "GET /api/properties" do
-    it "returns a list of properties" do
+    it "returns a list of properties with their units" do
       property1 = create(:property)
       property2 = create(:property)
+      unit1 = create(:unit, property: property1)
+      unit2 = create(:unit, property: property1)
+      unit3 = create(:unit, property: property2)
 
       get "/api/properties"
 
@@ -14,7 +17,9 @@ RSpec.describe "Properties API", type: :request do
 
       expect(body).to be_an(Array)
       expect(body.size).to eq(2)
-      expect(body.first).to include(
+
+      first_property = body.find { |p| p["id"] == property1.id }
+      expect(first_property).to include(
         "id" => property1.id,
         "name" => property1.name,
         "address1" => property1.address1,
@@ -24,12 +29,16 @@ RSpec.describe "Properties API", type: :request do
         "year_built" => property1.year_built,
         "website_url" => property1.website_url
       )
+      expect(first_property["units"]).to be_an(Array)
+      expect(first_property["units"].map { |u| u["id"] }).to match_array([unit1.id, unit2.id])
     end
   end
 
   describe "GET /api/properties/:id" do
-    it "returns a single property" do
+    it "returns a single property with its units" do
       property = create(:property)
+      unit1 = create(:unit, property: property)
+      unit2 = create(:unit, property: property)
 
       get "/api/properties/#{property.id}"
 
@@ -47,6 +56,9 @@ RSpec.describe "Properties API", type: :request do
         "year_built" => property.year_built,
         "website_url" => property.website_url
       )
+
+      expect(body["units"]).to be_an(Array)
+      expect(body["units"].map { |u| u["id"] }).to match_array([unit1.id, unit2.id])
     end
 
     it "returns 404 if the property does not exist" do
