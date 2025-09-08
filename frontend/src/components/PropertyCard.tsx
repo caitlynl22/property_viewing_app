@@ -20,6 +20,17 @@ export default function PropertyCard({ property }) {
             </a>
           </li>
         )}
+        {property.units.length > 0 ? (
+          <ul className="list-disc list-inside text-sm space-y-1">
+            {property.units.map((unit) => (
+              <li key={unit.id}>
+                {unit.name} — {unit.bedroom_count} bd / {unit.bathroom_count} ba, {unit.unit_size} sqft
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-gray-500">This property has no units.</p>
+        )}
       </ul>
     </div>
   )
