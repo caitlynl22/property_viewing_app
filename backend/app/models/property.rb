@@ -4,6 +4,7 @@ class Property < ApplicationRecord
     MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI
     SC SD TN TX UT VT VA WA WV WI WY DC
   ].freeze
+  has_many :units, dependent: :destroy
 
   validates :name, presence: true
   validates :address1, presence: true
