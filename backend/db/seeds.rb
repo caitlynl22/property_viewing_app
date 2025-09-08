@@ -21,7 +21,7 @@ US_STATES = Property::US_STATES
   property = Property.create!(
     name: Faker::Company.name,
     address1: Faker::Address.street_address,
-    address2: [Faker::Address.secondary_address, nil].sample,
+    address2: [ Faker::Address.secondary_address, nil ].sample,
     city: Faker::Address.city,
     state: US_STATES.sample,
     zip: Faker::Address.zip_code,

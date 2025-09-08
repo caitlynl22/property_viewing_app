@@ -30,7 +30,7 @@ RSpec.describe "Properties API", type: :request do
         "website_url" => property1.website_url
       )
       expect(first_property["units"]).to be_an(Array)
-      expect(first_property["units"].map { |u| u["id"] }).to match_array([unit1.id, unit2.id])
+      expect(first_property["units"].map { |u| u["id"] }).to match_array([ unit1.id, unit2.id ])
     end
   end
 
@@ -58,7 +58,7 @@ RSpec.describe "Properties API", type: :request do
       )
 
       expect(body["units"]).to be_an(Array)
-      expect(body["units"].map { |u| u["id"] }).to match_array([unit1.id, unit2.id])
+      expect(body["units"].map { |u| u["id"] }).to match_array([ unit1.id, unit2.id ])
     end
 
     it "returns 404 if the property does not exist" do
