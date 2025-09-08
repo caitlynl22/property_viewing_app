@@ -9,14 +9,16 @@
 #   end
 require "faker"
 
-puts "Seeding properties..."
-
+puts "Clearing existing data..."
+Unit.destroy_all
 Property.destroy_all
+
+puts "Seeding properties and units..."
 
 US_STATES = Property::US_STATES
 
 20.times do
-  Property.create!(
+  property = Property.create!(
     name: Faker::Company.name,
     address1: Faker::Address.street_address,
     address2: [Faker::Address.secondary_address, nil].sample,
@@ -26,7 +28,17 @@ US_STATES = Property::US_STATES
     year_built: rand(1800..Date.current.year),
     website_url: Faker::Internet.url
   )
+
+  # Each property gets between 2–5 units
+  rand(2..5).times do |n|
+    Unit.create!(
+      property: property,
+      name: "Apt #{n + 1}",
+      bedroom_count: rand(0..5),
+      bathroom_count: rand(1..4),
+      unit_size: rand(300..5000)
+    )
+  end
 end
 
-puts "Created #{Property.count} properties."
-
+puts "Created #{Property.count} properties with #{Unit.count} units."
