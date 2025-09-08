@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Properties API", type: :request do
-  describe "GET /properties" do
+  describe "GET /api/properties" do
     it "returns a list of properties" do
       property1 = create(:property)
       property2 = create(:property)
 
-      get "/properties"
+      get "/api/properties"
 
       expect(response).to have_http_status(:ok)
 
@@ -27,11 +27,11 @@ RSpec.describe "Properties API", type: :request do
     end
   end
 
-  describe "GET /properties/:id" do
+  describe "GET /api/properties/:id" do
     it "returns a single property" do
       property = create(:property)
 
-      get "/properties/#{property.id}"
+      get "/api/properties/#{property.id}"
 
       expect(response).to have_http_status(:ok)
 
@@ -50,7 +50,7 @@ RSpec.describe "Properties API", type: :request do
     end
 
     it "returns 404 if the property does not exist" do
-      get "/properties/999999"
+      get "/api/properties/999999"
 
       expect(response).to have_http_status(:not_found)
     end
