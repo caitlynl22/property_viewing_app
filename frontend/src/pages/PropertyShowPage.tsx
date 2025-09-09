@@ -22,7 +22,7 @@ export default function PropertyShowPage() {
   return (
     <div className="container mx-auto p-4">
       {loading && <p>Loading property details...</p>}
-      <h2 className="text-2xl font-bold mb-4">Property Details</h2>
+      <h1 className="text-2xl font-bold mb-8">Property Details</h1>
       <PropertyCard property={property} />
     </div>
   )
