@@ -1,4 +1,5 @@
 class Property < ApplicationRecord
+  after_create :generate_description, if: -> { description.blank? }
   US_STATES = %w[
     AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD
     MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI
@@ -23,4 +24,10 @@ class Property < ApplicationRecord
       less_than_or_equal_to: Date.current.year
     },
     allow_nil: true
+
+  private
+
+  def generate_description
+    GeneratePropertyDescriptionJob.perform_later(self.id)
+  end
 end
