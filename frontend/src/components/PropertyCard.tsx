@@ -1,24 +1,24 @@
 export default function PropertyCard({ property }) {
   return (
-    <div className="border rounded-lg overflow-hidden shadow-lg">
-      <h2 className="text-xl font-semibold p-4">{property.name}</h2>
+    <div className="border rounded-lg overflow-hidden shadow-lg dark:shadow-[0_1px_3px_rgba(0,0,0,0.6),0_0_10px_rgba(255,255,255,0.05)]">
+      <h2 className="text-xl font-semibold p-4 dark:text-white">{property.name}</h2>
       <dl className="text-left p-8 space-y-2">
         <div>
-          <dt className="font-semibold">Address:</dt>
-          <dd>
+          <dt className="font-semibold dark:text-white">Address:</dt>
+          <dd className="dark:text-gray-400">
             <p>{property.address1}{property.address2 && `, ${property.address2}`}</p>
             <p>{property.city}, {property.state} {property.zip}</p>
           </dd>
         </div>
 
         <div className="flex space-x-2">
-          <dt className="font-semibold">Year Built:</dt>
-          <dd>{property.year_built}</dd>
+          <dt className="font-semibold dark:text-white">Year Built:</dt>
+          <dd className="dark:text-gray-400">{property.year_built}</dd>
         </div>
 
         {property.website_url && (
           <div className="flex space-x-2">
-            <dt className="font-semibold">Website:</dt>
+            <dt className="font-semibold dark:text-white">Website:</dt>
             <dd className="wrap-anywhere">
               <a
                 href={property.website_url}
@@ -32,12 +32,12 @@ export default function PropertyCard({ property }) {
           </div>
         )}
       </dl>
-      <h3 className="text-lg font-semibold">Available Units:</h3>
+      <h3 className="text-lg font-semibold dark:text-white">Available Units:</h3>
       {property.units.length > 0 ? (
         <div className="mt-8 flow-root">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 flex justify-center p-4">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-16">
-              <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15 mx-8">
+              <table className="relative min-w-full divide-y divide-gray-300 dark:divide-white/15">
                 <thead>
                   <tr>
                     <th
